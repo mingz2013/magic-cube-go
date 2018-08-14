@@ -8,97 +8,18 @@ import (
 
 // 第一种思路，按每个面分，一个面9个cell，一共6个面
 
-type Cell int
-
-func (c Cell) Color() int {
-	return int(c) / 10
-}
-
-func NewCell(i int) Cell {
-	return Cell(i)
-}
-
-type Side [9]Cell // 二维的，应当有二维的操作
-
-func (s *Side) Init(color int) {
-	for i := 0; i < len(s); i++ {
-		s[i] = NewCell(color*10 + i)
-	}
-}
-
-func NewSide(color int) Side {
-	s := Side{}
-	s.Init(color)
-	return s
-}
-
-func (s *Side) clockwise() {
-	// 顺时针90度
-
-	s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7], s[8] = s[6], s[3], s[0], s[7], s[4], s[1], s[8], s[5], s[2]
-
-	//log.Println(s)
-}
-
-func (s *Side) anticlockwise() {
-	// 逆时针90度
-	s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7], s[8] = s[2], s[5], s[8], s[1], s[4], s[7], s[0], s[3], s[6]
-}
-
-func (s *Side) X0() (c1, c2, c3 Cell) {
-	return s[0], s[3], s[6]
-}
-
-func (s *Side) changeX0(l1, l2, l3 Cell) {
-	s[0], s[3], s[6] = l1, l2, l3
-}
-
-func (s *Side) changeX1(l1, l2, l3 Cell) {
-	s[1], s[4], s[7] = l1, l2, l3
-}
-
-func (s *Side) X1() (c1, c2, c3 Cell) {
-	return s[1], s[4], s[7]
-}
-
-func (s *Side) changeX2(l1, l2, l3 Cell) {
-	s[2], s[5], s[8] = l1, l2, l3
-}
-
-func (s *Side) X2() (c1, c2, c3 Cell) {
-	return s[2], s[5], s[8]
-}
-
-func (s *Side) changeY0(l1, l2, l3 Cell) {
-	s[0], s[1], s[2] = l1, l2, l3
-}
-
-func (s *Side) Y0() (c1, c2, c3 Cell) {
-	return s[0], s[1], s[2]
-}
-
-func (s *Side) changeY1(l1, l2, l3 Cell) {
-	s[3], s[4], s[5] = l1, l2, l3
-}
-
-func (s *Side) Y1() (c1, c2, c3 Cell) {
-	return s[3], s[4], s[5]
-}
-
-func (s *Side) changeY2(l1, l2, l3 Cell) {
-	s[6], s[7], s[8] = l1, l2, l3
-}
-
-func (s *Side) Y2() (c1, c2, c3 Cell) {
-	return s[6], s[7], s[8]
-}
-
 type MagicCube [6]Side
 
 func (m *MagicCube) Init() {
 	for i := 0; i < len(m); i++ {
 		m[i] = NewSide(i)
 	}
+}
+
+func NewMagicCube() MagicCube {
+	m := MagicCube{}
+	m.Init()
+	return m
 }
 
 // 前F后B左L右R上U下D
@@ -110,115 +31,6 @@ const (
 	U = 4 // up
 	D = 5 // down
 )
-
-func NewMagicCube() MagicCube {
-	m := MagicCube{}
-	m.Init()
-	return m
-}
-
-func (m *MagicCube) Random() {
-	m.doActionList(m.generateRandomActionList())
-}
-
-func (m *MagicCube) actionList() (actionList []string) {
-	return []string{
-		"F", "FR", "F2",
-		"B", "BR", "B2",
-		"L", "LR", "L2",
-		"R", "RR", "R2",
-		"U", "UR", "U2",
-		"D", "DR", "D2",
-		"E", "ER", "E2",
-		"S", "SR", "S2",
-		"M", "MR", "M2",
-	}
-}
-
-func (m *MagicCube) generateRandomActionList() (actionList []string) {
-	// 生成随机action列表
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-
-	for i := 0; i < 1000; i++ {
-		j := r.Intn(len(m.actionList()))
-		actionList = append(actionList, m.actionList()[j])
-	}
-	log.Println(actionList)
-	return
-}
-
-func (m *MagicCube) parseActionList(actions string) (actionList []string) {
-	// 拆分string为一个个单独的action
-
-	return
-}
-
-func (m *MagicCube) doActionList(actionList []string) {
-	for i := 0; i < len(actionList); i++ {
-		m.DoAction(actionList[i])
-	}
-}
-
-func (m *MagicCube) DoAction(action string) {
-	switch action {
-	case "F":
-		m.F()
-	case "FR":
-		m.FR()
-	case "F2":
-		m.F2()
-	case "B":
-		m.B()
-	case "BR":
-		m.BR()
-	case "B2":
-		m.B2()
-	case "L":
-		m.L()
-	case "LR":
-		m.LR()
-	case "L2":
-		m.L2()
-	case "R":
-		m.R()
-	case "RR":
-		m.RR()
-	case "R2":
-		m.R2()
-	case "U":
-		m.U()
-	case "UR":
-		m.UR()
-	case "U2":
-		m.U2()
-	case "D":
-		m.D()
-	case "DR":
-		m.DR()
-	case "D2":
-		m.D2()
-	case "E":
-		m.E()
-	case "ER":
-		m.ER()
-	case "E2":
-		m.E2()
-	case "S":
-		m.S()
-	case "SR":
-		m.SR()
-	case "S2":
-		m.S2()
-	case "M":
-		m.M()
-	case "MR":
-		m.MR()
-	case "M2":
-		m.M2()
-	default:
-		break
-	}
-}
 
 // 读取不同面
 
@@ -244,6 +56,120 @@ func (m *MagicCube) USide() *Side {
 
 func (m *MagicCube) DSide() *Side {
 	return &m[D]
+}
+
+func (m *MagicCube) Random() {
+	m.doActionList(m.generateRandomActionList())
+}
+
+func (m *MagicCube) actionList() (actionList []string) {
+	return []string{
+		A_F, A_FR, A_F2,
+		A_B, A_BR, A_B2,
+		A_L, A_LR, A_L2,
+		A_R, A_RR, A_R2,
+		A_U, A_UR, A_U2,
+		A_D, A_DR, A_D2,
+		A_E, A_ER, A_E2,
+		A_S, A_SR, A_S2,
+		A_M, A_MR, A_M2,
+	}
+}
+
+func (m *MagicCube) generateRandomActionList() (actionList []string) {
+	// 生成随机action列表
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+
+	for i := 0; i < 1000; i++ {
+		j := r.Intn(len(m.actionList()))
+		actionList = append(actionList, m.actionList()[j])
+	}
+	log.Println(actionList)
+	return
+}
+
+func (m *MagicCube) parseActionList(actions string) (actionList []string) {
+	// 拆分string为一个个单独的action
+
+	s := NewScanner(actions)
+
+	for {
+		tok, ok := s.NextToken()
+		if !ok {
+			break
+		}
+
+		actionList = append(actionList, tok)
+	}
+
+	return
+}
+
+func (m *MagicCube) doActionList(actionList []string) {
+	for i := 0; i < len(actionList); i++ {
+		m.DoAction(actionList[i])
+	}
+}
+
+func (m *MagicCube) DoAction(action string) {
+	switch action {
+	case A_F:
+		m.F()
+	case A_FR:
+		m.FR()
+	case A_F2:
+		m.F2()
+	case A_B:
+		m.B()
+	case A_BR:
+		m.BR()
+	case A_B2:
+		m.B2()
+	case A_L:
+		m.L()
+	case A_LR:
+		m.LR()
+	case A_L2:
+		m.L2()
+	case A_R:
+		m.R()
+	case A_RR:
+		m.RR()
+	case A_R2:
+		m.R2()
+	case A_U:
+		m.U()
+	case A_UR:
+		m.UR()
+	case A_U2:
+		m.U2()
+	case A_D:
+		m.D()
+	case A_DR:
+		m.DR()
+	case A_D2:
+		m.D2()
+	case A_E:
+		m.E()
+	case A_ER:
+		m.ER()
+	case A_E2:
+		m.E2()
+	case A_S:
+		m.S()
+	case A_SR:
+		m.SR()
+	case A_S2:
+		m.S2()
+	case A_M:
+		m.M()
+	case A_MR:
+		m.MR()
+	case A_M2:
+		m.M2()
+	default:
+		break
+	}
 }
 
 // 一系列操作，旋转操作
