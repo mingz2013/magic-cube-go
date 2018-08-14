@@ -1,7 +1,5 @@
 package magic_cube
 
-import "log"
-
 type Scanner struct {
 	src string
 
@@ -37,10 +35,12 @@ func (s *Scanner) nextCh() {
 		s.ch = rune(s.src[s.offset])
 	}
 
+	//log.Println("nextCh...", string(s.ch), s.offset)
+
 }
 
 func (s *Scanner) scanToken() (tok string, ok bool) {
-	log.Println("scanToken...", tok, string(s.ch), s.offset)
+	//log.Println("scanToken...", tok, string(s.ch), s.offset)
 
 	switch s.ch {
 	case 'F':
@@ -75,7 +75,7 @@ func (s *Scanner) scanToken() (tok string, ok bool) {
 
 func (s *Scanner) scanAfter(tok string) (string, bool) {
 
-	log.Println("scanAfter...", tok, s.ch, s.offset)
+	//log.Println("scanAfter...", tok, s.ch, s.offset)
 
 	switch s.ch {
 	case 'R':

@@ -59,7 +59,29 @@ func (m *MagicCube) DSide() *Side {
 }
 
 func (m *MagicCube) Random() {
-	m.doActionList(m.generateRandomActionList())
+	s := m.joinActionList(m.generateRandomActionList())
+	log.Println(s)
+	al := m.parseActionList(s)
+	//log.Println(al)
+	m.doActionList(al)
+}
+
+func (m *MagicCube) joinActionList(actionList []string) (s string) {
+	for i := 0; i < len(actionList); i++ {
+		action := actionList[i]
+
+		if action == A_R {
+			s += "T"
+		} else if action == A_RR {
+			s += "TR"
+		} else if action == A_R2 {
+			s += "T2"
+		} else {
+			s += action
+		}
+
+	}
+	return
 }
 
 func (m *MagicCube) actionList() (actionList []string) {
@@ -84,7 +106,7 @@ func (m *MagicCube) generateRandomActionList() (actionList []string) {
 		j := r.Intn(len(m.actionList()))
 		actionList = append(actionList, m.actionList()[j])
 	}
-	log.Println(actionList)
+	//log.Println(actionList)
 	return
 }
 
