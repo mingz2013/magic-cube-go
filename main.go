@@ -8,6 +8,7 @@ import (
 func main() {
 
 	m := magic_cube.NewMagicCube()
+	m.Random()
 	log.Println(m)
 
 }
