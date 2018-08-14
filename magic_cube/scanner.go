@@ -53,7 +53,7 @@ func (s *Scanner) scanToken() (tok string, ok bool) {
 		tok = "D"
 	case 'L':
 		tok = "L"
-	case 'T':
+	case 'T': // 注意这里，用T代替R，避免出现解析歧义
 		tok = "R"
 	case 'E':
 		tok = "E"
