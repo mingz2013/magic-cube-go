@@ -12,11 +12,11 @@ func NewCell(i int) Cell {
 	return Cell(i)
 }
 
-type Side [9]Cell
+type Side [9]Cell // 二维的，应当有二维的操作
 
 func (s *Side) Init(color int) {
 	for i := 0; i < len(s); i++ {
-		s[i] = NewCell(color*10 + i)
+		s[i] = NewCell(color*10 + i + 1)
 	}
 }
 
@@ -26,11 +26,47 @@ func NewSide(color int) Side {
 	return s
 }
 
+func (s *Side) clockwise() {
+	// 顺时针90度
+
+	s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7], s[8] = s[6], s[3], s[0], s[7], s[4], s[1], s[8], s[5], s[2]
+
+}
+
+func (s *Side) anticlockwise() {
+	// 逆时针90度
+	s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7], s[8] = s[2], s[5], s[8], s[1], s[4], s[7], s[0], s[3], s[6]
+}
+
+func (s *Side) changeX0(l1, l2, l3 Cell) {
+	s[0], s[3], s[6] = l1, l2, l3
+}
+
+func (s *Side) changeX1(l1, l2, l3 Cell) {
+	s[1], s[4], s[7] = l1, l2, l3
+}
+
+func (s *Side) changeX2(l1, l2, l3 Cell) {
+	s[2], s[5], s[8] = l1, l2, l3
+}
+
+func (s *Side) changeY0(l1, l2, l3 Cell) {
+	s[0], s[1], s[2] = l1, l2, l3
+}
+
+func (s *Side) changeY1(l1, l2, l3 Cell) {
+	s[3], s[4], s[5] = l1, l2, l3
+}
+
+func (s *Side) changeY2(l1, l2, l3 Cell) {
+	s[6], s[7], s[8] = l1, l2, l3
+}
+
 type MagicCube [6]Side
 
 func (m *MagicCube) Init() {
 	for i := 0; i < len(m); i++ {
-		m[i] = NewSide(i)
+		m[i] = NewSide(i + 1)
 	}
 }
 
@@ -84,6 +120,8 @@ func (m *MagicCube) DSide() Side {
 func (m *MagicCube) U() {
 	// 上层做顺时针90度旋转
 	// 涉及前后左右四面的上层，涉及U的整个变换
+	m.USide().clockwise()
+	m.LSide()
 
 }
 
