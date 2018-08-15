@@ -310,7 +310,8 @@ func (m *MagicCube) D() {
 }
 
 func (m *MagicCube) DR() {
-	m.DSide().clockwise()
+	m.DSide().anticlockwise()
+
 	r := m.FSide().Y2()
 	m.FSide().setY2(m.LSide().Y2())
 	m.LSide().setY2(m.BSide().Y2())

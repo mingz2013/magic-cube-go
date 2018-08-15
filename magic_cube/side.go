@@ -42,50 +42,50 @@ func (s *Side) anticlockwise() {
 	s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7], s[8] = s[2], s[5], s[8], s[1], s[4], s[7], s[0], s[3], s[6]
 }
 
-func (s *Side) X0() (r Row) {
+func (s *Side) X0() (r *Row) {
 	return NewRow(s[0], s[3], s[6])
 }
 
-func (s *Side) setX0(r Row) {
+func (s *Side) setX0(r *Row) {
 	s[0], s[3], s[6] = r.Items()
 }
 
-func (s *Side) X1() (r Row) {
+func (s *Side) X1() (r *Row) {
 	return NewRow(s[1], s[4], s[7])
 }
 
-func (s *Side) setX1(r Row) {
+func (s *Side) setX1(r *Row) {
 	s[1], s[4], s[7] = r.Items()
 }
 
-func (s *Side) setX2(r Row) {
+func (s *Side) setX2(r *Row) {
 	s[2], s[5], s[8] = r.Items()
 }
 
-func (s *Side) X2() (r Row) {
+func (s *Side) X2() (r *Row) {
 	return NewRow(s[2], s[5], s[8])
 }
 
-func (s *Side) setY0(r Row) {
+func (s *Side) setY0(r *Row) {
 	s[0], s[1], s[2] = r.Items()
 }
 
-func (s *Side) Y0() (r Row) {
+func (s *Side) Y0() (r *Row) {
 	return NewRow(s[0], s[1], s[2])
 }
 
-func (s *Side) setY1(r Row) {
+func (s *Side) setY1(r *Row) {
 	s[3], s[4], s[5] = r.Items()
 }
 
-func (s *Side) Y1() (r Row) {
+func (s *Side) Y1() (r *Row) {
 	return NewRow(s[3], s[4], s[5])
 }
 
-func (s *Side) setY2(r Row) {
+func (s *Side) setY2(r *Row) {
 	s[6], s[7], s[8] = r.Items()
 }
 
-func (s *Side) Y2() (r Row) {
+func (s *Side) Y2() (r *Row) {
 	return NewRow(s[6], s[7], s[8])
 }
