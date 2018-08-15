@@ -8,6 +8,11 @@ import (
 
 // 第一种思路，按每个面分，一个面9个cell，一共6个面
 
+// 以左近下方为原点
+// 向右为X坐标
+// 向前为Y坐标
+// 向上为Z坐标
+
 type MagicCube [6]Side
 
 func (m *MagicCube) Init() {
