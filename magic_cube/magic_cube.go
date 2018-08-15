@@ -1,5 +1,7 @@
 package magic_cube
 
+import "log"
+
 // 第一种思路，按每个面分，一个面9个cell，一共6个面
 
 // 以左近下方为原点
@@ -57,9 +59,25 @@ func (m *MagicCube) DSide() *Side {
 	return &m[D]
 }
 
+func (m *MagicCube) IsBingo() (b bool) {
+	for i := 0; i < len(m); i++ {
+		s := m[i]
+		b = s.isBingo()
+		if !b {
+			return
+		}
+	}
+	return true
+}
+
 func (m *MagicCube) DoActionList(actionList []string) {
 	for i := 0; i < len(actionList); i++ {
 		m.DoAction(actionList[i])
+		b := m.IsBingo()
+		if b {
+			log.Println("isBingo.......")
+			break
+		}
 	}
 }
 

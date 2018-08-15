@@ -14,6 +14,21 @@ func NewSide(color int) Side {
 	return s
 }
 
+func (s *Side) isBingo() (b bool) {
+	color := -1
+	for i := 0; i < len(s); i++ {
+		c := s[i]
+		if color == -1 {
+			color = c.Color()
+		} else {
+			if color != c.Color() {
+				return false
+			}
+		}
+	}
+	return true
+}
+
 func (s *Side) clockwise() {
 	// 顺时针90度
 
