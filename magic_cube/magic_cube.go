@@ -401,7 +401,7 @@ func (m *MagicCube) E2() {
 	m.E()
 }
 
-func (m *MagicCube) S() {
+func (m *MagicCube) M() {
 	// X1
 
 	c1, c2, c3 := m.FSide().X1()
@@ -412,7 +412,7 @@ func (m *MagicCube) S() {
 
 }
 
-func (m *MagicCube) SR() {
+func (m *MagicCube) MR() {
 	c1, c2, c3 := m.FSide().X1()
 	m.FSide().changeX1(m.DSide().X1())
 	m.DSide().changeX1(m.BSide().X1())
@@ -420,13 +420,13 @@ func (m *MagicCube) SR() {
 	m.USide().changeX1(c1, c2, c3)
 }
 
-func (m *MagicCube) S2() {
-	m.S()
-	m.S()
+func (m *MagicCube) M2() {
+	m.M()
+	m.M()
 
 }
 
-func (m *MagicCube) M() {
+func (m *MagicCube) S() {
 	// Y1
 	c1, c2, c3 := m.USide().Y1()
 	m.USide().changeY1(m.LSide().X1())
@@ -435,7 +435,7 @@ func (m *MagicCube) M() {
 	m.RSide().changeX1(c1, c2, c3)
 }
 
-func (m *MagicCube) MR() {
+func (m *MagicCube) SR() {
 	c1, c2, c3 := m.USide().Y1()
 	m.USide().changeY1(m.RSide().X1())
 	m.RSide().changeX1(m.DSide().Y1())
@@ -443,7 +443,7 @@ func (m *MagicCube) MR() {
 	m.LSide().changeX1(c1, c2, c3)
 }
 
-func (m *MagicCube) M2() {
-	m.M()
-	m.M()
+func (m *MagicCube) S2() {
+	m.S()
+	m.S()
 }
