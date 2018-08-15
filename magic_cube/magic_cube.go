@@ -151,11 +151,11 @@ func (m *MagicCube) U() {
 
 	m.USide().clockwise()
 
-	c1, c2, c3 := m.LSide().Y0()
+	r := m.LSide().Y0()
 	m.LSide().setY0(m.FSide().Y0())
 	m.FSide().setY0(m.RSide().Y0())
 	m.RSide().setY0(m.BSide().Y0())
-	m.BSide().setY0(c1, c2, c3)
+	m.BSide().setY0(r)
 
 }
 
@@ -164,11 +164,11 @@ func (m *MagicCube) UR() {
 
 	m.USide().anticlockwise()
 
-	c1, c2, c3 := m.LSide().Y0()
+	r := m.LSide().Y0()
 	m.LSide().setY0(m.BSide().Y0())
 	m.BSide().setY0(m.RSide().Y0())
 	m.RSide().setY0(m.FSide().Y0())
-	m.FSide().setY0(c1, c2, c3)
+	m.FSide().setY0(r)
 }
 
 func (m *MagicCube) U2() {
@@ -185,24 +185,24 @@ func (m *MagicCube) R() {
 
 	m.RSide().clockwise()
 
-	c1, c2, c3 := m.USide().X2()
+	r := m.USide().X2()
 
 	m.USide().setX2(m.FSide().X2())
 	m.FSide().setX2(m.DSide().X2())
 	m.DSide().setX2(m.BSide().X2())
-	m.BSide().setX2(c1, c2, c3)
+	m.BSide().setX2(r)
 
 }
 
 func (m *MagicCube) RR() {
 	m.RSide().anticlockwise()
 
-	c1, c2, c3 := m.USide().X2()
+	r := m.USide().X2()
 
 	m.USide().setX2(m.BSide().X2())
 	m.BSide().setX2(m.DSide().X2())
 	m.DSide().setX2(m.FSide().X2())
-	m.FSide().setX2(c1, c2, c3)
+	m.FSide().setX2(r)
 }
 
 func (m *MagicCube) R2() {
@@ -218,23 +218,23 @@ func (m *MagicCube) F() {
 
 	m.FSide().clockwise()
 
-	c1, c2, c3 := m.USide().Y2()
+	r := m.USide().Y2()
 
 	m.USide().setY2(m.LSide().X2())
 	m.LSide().setX2(m.DSide().Y2())
 	m.DSide().setY2(m.RSide().X0())
-	m.RSide().setX0(c1, c2, c3)
+	m.RSide().setX0(r)
 
 }
 func (m *MagicCube) FR() {
 	m.FSide().anticlockwise()
 
-	c1, c2, c3 := m.USide().Y2()
+	r := m.USide().Y2()
 
 	m.USide().setY2(m.RSide().X0())
 	m.RSide().setX0(m.DSide().Y2())
 	m.DSide().setY2(m.LSide().X2())
-	m.LSide().setX2(c1, c2, c3)
+	m.LSide().setX2(r)
 }
 
 func (m *MagicCube) F2() {
@@ -247,22 +247,22 @@ func (m *MagicCube) L() {
 
 	m.LSide().clockwise()
 
-	c1, c2, c3 := m.USide().X0()
+	r := m.USide().X0()
 	m.USide().setX0(m.BSide().X0())
 	m.BSide().setX0(m.DSide().X0())
 	m.DSide().setX0(m.FSide().X0())
-	m.FSide().setX0(c1, c2, c3)
+	m.FSide().setX0(r)
 
 }
 
 func (m *MagicCube) LR() {
 	m.LSide().anticlockwise()
 
-	c1, c2, c3 := m.USide().X0()
+	r := m.USide().X0()
 	m.USide().setX0(m.FSide().X0())
 	m.FSide().setX0(m.DSide().X0())
 	m.DSide().setX0(m.BSide().X0())
-	m.BSide().setX0(c1, c2, c3)
+	m.BSide().setX0(r)
 
 }
 
@@ -275,21 +275,21 @@ func (m *MagicCube) B() {
 	// Y2
 	m.BSide().clockwise()
 
-	c1, c2, c3 := m.USide().Y0()
+	r := m.USide().Y0()
 	m.USide().setY0(m.RSide().X2())
 	m.RSide().setX2(m.DSide().Y0())
 	m.DSide().setY0(m.LSide().X0())
-	m.LSide().setX0(c1, c2, c3)
+	m.LSide().setX0(r)
 }
 
 func (m *MagicCube) BR() {
 	m.BSide().anticlockwise()
 
-	c1, c2, c3 := m.USide().Y0()
+	r := m.USide().Y0()
 	m.USide().setY0(m.LSide().X0())
 	m.LSide().setX0(m.DSide().Y0())
 	m.DSide().setY0(m.RSide().X2())
-	m.RSide().setX2(c1, c2, c3)
+	m.RSide().setX2(r)
 
 }
 
@@ -302,20 +302,20 @@ func (m *MagicCube) D() {
 	// Z0
 
 	m.DSide().clockwise()
-	c1, c2, c3 := m.FSide().Y2()
+	r := m.FSide().Y2()
 	m.FSide().setY2(m.RSide().Y2())
 	m.RSide().setY2(m.BSide().Y2())
 	m.BSide().setY2(m.LSide().Y2())
-	m.LSide().setY2(c1, c2, c3)
+	m.LSide().setY2(r)
 }
 
 func (m *MagicCube) DR() {
 	m.DSide().clockwise()
-	c1, c2, c3 := m.FSide().Y2()
+	r := m.FSide().Y2()
 	m.FSide().setY2(m.LSide().Y2())
 	m.LSide().setY2(m.BSide().Y2())
 	m.BSide().setY2(m.RSide().Y2())
-	m.RSide().setY2(c1, c2, c3)
+	m.RSide().setY2(r)
 }
 
 func (m *MagicCube) D2() {
@@ -326,23 +326,23 @@ func (m *MagicCube) D2() {
 func (m *MagicCube) E() {
 	// Z1
 	// 中间层
-	c1, c2, c3 := m.FSide().Y1()
+	r := m.FSide().Y1()
 
 	m.FSide().setY1(m.RSide().Y1())
 	m.RSide().setY1(m.BSide().Y1())
 	m.BSide().setY1(m.LSide().Y1())
 
-	m.LSide().setY1(c1, c2, c3)
+	m.LSide().setY1(r)
 }
 
 func (m *MagicCube) ER() {
-	c1, c2, c3 := m.FSide().Y1()
+	r := m.FSide().Y1()
 
 	m.FSide().setY1(m.LSide().Y1())
 	m.LSide().setY1(m.BSide().Y1())
 	m.BSide().setY1(m.RSide().Y1())
 
-	m.RSide().setY1(c1, c2, c3)
+	m.RSide().setY1(r)
 }
 
 func (m *MagicCube) E2() {
@@ -353,20 +353,20 @@ func (m *MagicCube) E2() {
 func (m *MagicCube) M() {
 	// X1
 
-	c1, c2, c3 := m.FSide().X1()
+	r := m.FSide().X1()
 	m.FSide().setX1(m.USide().X1())
 	m.USide().setX1(m.BSide().X1())
 	m.BSide().setX1(m.DSide().X1())
-	m.DSide().setX1(c1, c2, c3)
+	m.DSide().setX1(r)
 
 }
 
 func (m *MagicCube) MR() {
-	c1, c2, c3 := m.FSide().X1()
+	r := m.FSide().X1()
 	m.FSide().setX1(m.DSide().X1())
 	m.DSide().setX1(m.BSide().X1())
 	m.BSide().setX1(m.USide().X1())
-	m.USide().setX1(c1, c2, c3)
+	m.USide().setX1(r)
 }
 
 func (m *MagicCube) M2() {
@@ -377,19 +377,19 @@ func (m *MagicCube) M2() {
 
 func (m *MagicCube) S() {
 	// Y1
-	c1, c2, c3 := m.USide().Y1()
+	r := m.USide().Y1()
 	m.USide().setY1(m.LSide().X1())
 	m.LSide().setX1(m.DSide().Y1())
 	m.DSide().setY1(m.RSide().X1())
-	m.RSide().setX1(c1, c2, c3)
+	m.RSide().setX1(r)
 }
 
 func (m *MagicCube) SR() {
-	c1, c2, c3 := m.USide().Y1()
+	r := m.USide().Y1()
 	m.USide().setY1(m.RSide().X1())
 	m.RSide().setX1(m.DSide().Y1())
 	m.DSide().setY1(m.LSide().X1())
-	m.LSide().setX1(c1, c2, c3)
+	m.LSide().setX1(r)
 }
 
 func (m *MagicCube) S2() {
