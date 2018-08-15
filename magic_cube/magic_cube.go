@@ -82,6 +82,7 @@ func (m *MagicCube) DoActionList(actionList []string) {
 }
 
 func (m *MagicCube) DoAction(action string) {
+	log.Println("DoAction", action)
 	switch action {
 	case A_F:
 		m.F()
@@ -166,8 +167,8 @@ func (m *MagicCube) UR() {
 	c1, c2, c3 := m.LSide().Y0()
 	m.LSide().setY0(m.BSide().Y0())
 	m.BSide().setY0(m.RSide().Y0())
-	m.RSide().setY0(m.RSide().Y0())
-	m.RSide().setY0(c1, c2, c3)
+	m.RSide().setY0(m.FSide().Y0())
+	m.FSide().setY0(c1, c2, c3)
 }
 
 func (m *MagicCube) U2() {
@@ -247,8 +248,8 @@ func (m *MagicCube) L() {
 	m.LSide().clockwise()
 
 	c1, c2, c3 := m.USide().X0()
-	m.USide().setX0(m.BSide().Y2())
-	m.BSide().setY2(m.DSide().X0())
+	m.USide().setX0(m.BSide().X0())
+	m.BSide().setX0(m.DSide().X0())
 	m.DSide().setX0(m.FSide().X0())
 	m.FSide().setX0(c1, c2, c3)
 
@@ -260,8 +261,8 @@ func (m *MagicCube) LR() {
 	c1, c2, c3 := m.USide().X0()
 	m.USide().setX0(m.FSide().X0())
 	m.FSide().setX0(m.DSide().X0())
-	m.DSide().setX0(m.LSide().Y2())
-	m.LSide().setY2(c1, c2, c3)
+	m.DSide().setX0(m.BSide().X0())
+	m.BSide().setX0(c1, c2, c3)
 
 }
 
