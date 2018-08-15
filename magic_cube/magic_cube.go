@@ -1,11 +1,5 @@
 package magic_cube
 
-import (
-	"log"
-	"math/rand"
-	"time"
-)
-
 // 第一种思路，按每个面分，一个面9个cell，一共6个面
 
 // 以左近下方为原点
@@ -63,76 +57,7 @@ func (m *MagicCube) DSide() *Side {
 	return &m[D]
 }
 
-func (m *MagicCube) Random() {
-	s := m.joinActionList(m.generateRandomActionList())
-	log.Println(s)
-	al := m.parseActionList(s)
-	//log.Println(al)
-	m.doActionList(al)
-}
-
-func (m *MagicCube) joinActionList(actionList []string) (s string) {
-	for i := 0; i < len(actionList); i++ {
-		action := actionList[i]
-
-		if action == A_R {
-			s += "T"
-		} else if action == A_RR {
-			s += "TR"
-		} else if action == A_R2 {
-			s += "T2"
-		} else {
-			s += action
-		}
-
-	}
-	return
-}
-
-func (m *MagicCube) actionList() (actionList []string) {
-	return []string{
-		A_F, A_FR, A_F2,
-		A_B, A_BR, A_B2,
-		A_L, A_LR, A_L2,
-		A_R, A_RR, A_R2,
-		A_U, A_UR, A_U2,
-		A_D, A_DR, A_D2,
-		A_E, A_ER, A_E2,
-		A_S, A_SR, A_S2,
-		A_M, A_MR, A_M2,
-	}
-}
-
-func (m *MagicCube) generateRandomActionList() (actionList []string) {
-	// 生成随机action列表
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-
-	for i := 0; i < 1000; i++ {
-		j := r.Intn(len(m.actionList()))
-		actionList = append(actionList, m.actionList()[j])
-	}
-	//log.Println(actionList)
-	return
-}
-
-func (m *MagicCube) parseActionList(actions string) (actionList []string) {
-	// 拆分string为一个个单独的action
-
-	s := NewScanner(actions)
-
-	for {
-		tok, ok := s.NextToken()
-		if !ok {
-			break
-		}
-
-		actionList = append(actionList, tok)
-	}
-
-	return
-}
-
-func (m *MagicCube) doActionList(actionList []string) {
+func (m *MagicCube) DoActionList(actionList []string) {
 	for i := 0; i < len(actionList); i++ {
 		m.DoAction(actionList[i])
 	}

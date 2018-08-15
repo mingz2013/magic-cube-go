@@ -8,7 +8,12 @@ import (
 func main() {
 
 	m := magic_cube.NewMagicCube()
-	m.Random()
+	//m.Random()
+
+	al := magic_cube.RandomActionList()
+
+	m.DoActionList(al)
+
 	log.Println(m)
 
 }
