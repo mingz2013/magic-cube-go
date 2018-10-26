@@ -1,5 +1,5 @@
 help:
-	echo "help"
+	@echo "Makefile help"
 
 magic-cube-go:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
@@ -17,5 +17,5 @@ run:
 	docker run --net="host" -it mingz2013/magic-cube-go
 
 
-.PYONY: commit-docker, docker-image, magic-cube-go, help
+.PYONY: help, commit-docker, docker-image, magic-cube-go, run
 
