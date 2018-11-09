@@ -12,9 +12,8 @@ commit-docker:docker-image
 	docker login
 	docker push mingz2013/magic-cube-go
 
-
 run:
-	docker run --net="host" -it mingz2013/magic-cube-go
+	docker run -d --link redis-mq:redis-mq --name magic-cube-go -it mingz2013/magic-cube-go:latest
 
 
 .PYONY: help, commit-docker, docker-image, magic-cube-go, run
