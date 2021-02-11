@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/mingz2013/magic-cube-go/magic_cube"
 	"log"
+	"magic-cube-go/magic_cube"
 )
 
 func main() {
